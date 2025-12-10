@@ -1,5 +1,11 @@
 # Design Patterns - Complete Guide
 
+## Video Reference
+📺 **YouTube Playlist**: [Design Patterns Tutorial](https://www.youtube.com/watch?v=USLwIwyWVIM&list=PLJq-63ZRPdBtLBbzA2fIG9mOPclbPDSxq)
+
+
+---
+
 ## Table of Contents
 1. [Singleton Pattern](#1-singleton-pattern)
 2. [Factory Pattern](#2-factory-pattern)
@@ -689,20 +695,3 @@ Focus on communication between objects
 | Adapter | Incompatible interfaces | Power plug adapter |
 
 ---
-
-## Tips for Learning
-
-1. **Start Simple**: Begin with Singleton and Factory
-2. **Use Real Examples**: Think of actual problems you've faced
-3. **Practice Coding**: Implement each pattern multiple times
-4. **Combine Patterns**: Real applications use multiple patterns together
-5. **Know When NOT to Use**: Don't over-engineer simple problems
-6. **Read Code**: Study open-source projects to see patterns in action
-
-## Common Mistakes to Avoid
-
-- Using patterns when not needed (over-engineering)
-- Forcing patterns where they don't fit
-- Not understanding the problem before applying pattern
-- Mixing up similar patterns (Decorator vs Proxy)
-- Creating too many abstraction layers

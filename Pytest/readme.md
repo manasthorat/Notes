@@ -1,5 +1,7 @@
 # Pytest Comprehensive Notes
+[![PyTest Tutorial](https://img.youtube.com/vi/EgpLj86ZHFQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=EgpLj86ZHFQ&t=1257s)
 
+📺 **Video Link**: [PyTest Explained](https://www.youtube.com/watch?v=EgpLj86ZHFQ&t=1257s)
 ## 1. Pytest Basics
 
 ### What is Pytest?

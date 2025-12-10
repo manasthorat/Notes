@@ -1,7 +1,10 @@
 # Design Patterns - Complete Guide
 
 ## Video Reference
-📺 **YouTube Playlist**: [Design Patterns Tutorial](https://www.youtube.com/watch?v=USLwIwyWVIM&list=PLJq-63ZRPdBtLBbzA2fIG9mOPclbPDSxq)
+
+[![Design Patterns Tutorial](https://img.youtube.com/vi/USLwIwyWVIM/maxresdefault.jpg)](https://www.youtube.com/watch?v=USLwIwyWVIM&list=PLJq-63ZRPdBtLBbzA2fIG9mOPclbPDSxq)
+
+📺 **YouTube Playlist**: [Design Patterns Tutorial - Complete Series](https://www.youtube.com/watch?v=USLwIwyWVIM&list=PLJq-63ZRPdBtLBbzA2fIG9mOPclbPDSxq)
 
 
 ---

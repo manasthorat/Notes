@@ -1,6 +1,6 @@
 import boto3
 from datetime import datetime
-from config import ACCOUNT_ID,ROLE_2_ARN,BUCKET_1_NAME,REGION
+from config import ACCOUNT_ID,ROLE_2_ARN,BUCKET_1_NAME,REGION,ROLE_1_ARN
 
 def assume_replication_role():
     print("Step1 - Creating STS Client")
@@ -23,7 +23,7 @@ def assume_replication_role():
     print("="*70)
     print("Step 3 - calling assuming role api")
     try:
-        response=sts_client.assume_role(Role_Arn=ROLE_2_ARN,RoleSessionName="ReplicationSession",
+        response=sts_client.assume_role(RoleArn=ROLE_2_ARN,RoleSessionName="ReplicationSession",
                                         DurationSeconds=3000)
         print("\n" + "="*70)
         print("STEP 4: EXAMINING THE RESPONSE")
@@ -49,6 +49,32 @@ def assume_replication_role():
     except Exception as e:
         print(f"Error : {e}")
         print("Failed to assume the role")
+
+
+
+def assume_application_role(replication_creds, app_role_arn ):
+    print("\nASSUMING APPLICATION ROLE")
+    sts_client = boto3.client(
+        "sts",
+        region_name=REGION,
+        aws_access_key_id=replication_creds["access_key"],
+        aws_secret_access_key=replication_creds["secret_key"],
+        aws_session_token=replication_creds["session_token"],
+    )
+
+    response = sts_client.assume_role(
+        RoleArn=app_role_arn,
+        RoleSessionName="ApplicationSession",
+        DurationSeconds=3000
+    )
+
+    credentials = response["Credentials"]
+    return {
+        "access_key": credentials["AccessKeyId"],
+        "secret_key": credentials["SecretAccessKey"],
+        "session_token": credentials["SessionToken"],
+        "expiration": credentials["Expiration"],
+    }
 
 def upload_with_tmp_credentials(credentials):
     print("\n" + "="*70)
@@ -87,7 +113,7 @@ Credentials expire at: {credentials['expiration']}
     try:
         response= s3_client.put_object(
             Bucket=BUCKET_1_NAME,
-            key=file_key,
+            Key=file_key,
             Body=file_content,
             ContentType='text/plain',
             ServerSideEncryption='aws:kms',
@@ -112,7 +138,7 @@ Credentials expire at: {credentials['expiration']}
 
         get_response = s3_client.get_object(
             Bucket=BUCKET_1_NAME,
-            key=file_key
+            Key=file_key
         )
 
         retrieved_content = get_response['Body'].read().decode('utf-8')
@@ -136,17 +162,19 @@ def main():
     print("AWS S3 UPLOAD USING REPLICATION ROLE")
 
 
-    credentials=assume_replication_role()
+    repl_credentials=assume_replication_role()
 
-    if credentials is None:
+    if repl_credentials is None:
         print("\nfailed to assue role")
         return
-    file_key = upload_with_tmp_credentials(credentials)
+    
+    app_credentials = assume_application_role(repl_credentials,ROLE_1_ARN)
+    file_key = upload_with_tmp_credentials(app_credentials)
     if file_key is None:
         print("\n❌ Failed to upload file. Exiting.")
         return
     
 if __name__ == "__main__":
-    # This runs when you execute: python3 upload_with_replication_role.py
+    
     main()
 

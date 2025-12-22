@@ -1,0 +1,16 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+
+# Terragrunt
+.terragrunt-cache/
+
+# Terraform lock files (optional but recommended to keep)
+# .terraform.lock.hcl
+
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/

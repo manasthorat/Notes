@@ -1,9 +1,9 @@
 include "root" {
-    path = find_in_parent_folders()
+    path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
-    source = "/Users/manas/notes/Notes/Terragrunt/terraform-modules/s3"
+    source = "/Users/manas/notes/Notes/Terragrunt/terraform-modules/iam"
 
 }
 
